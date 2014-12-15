@@ -1,0 +1,17 @@
+{
+  "options": {
+    "VERSION": "0.1",
+    "NW_PATH": "~/node-webkit",
+    "NW_VERSION": "0.10.5",
+    "APPNAME": "Myosotis",
+    "BUILD_DIR": "~/Myosotis/build",
+    "MORPH_PATH": "~/Myosotis/perseus-hopper/xml/data/greek.morph.xml",
+    "ML_PATH": "~/Myosotis/Classics/LSJ/opensource/ml.xml",
+    "FONT_PATH": "~/Myosotis/newathu405.ttf"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "shelljs": "^0.3.0",
+    "jquery": "^2.1.1"
+  }
+}

@@ -1,0 +1,13 @@
+{
+    "name": "Myosotis",
+    "main": "index.html",
+    "window": {
+        "show": false,
+        "toolbar": false
+    },
+    "webkit": {
+        "page-cache": true
+    }
+
+}
+

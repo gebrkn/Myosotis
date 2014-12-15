@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Μυοσωτίς</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="index.css">
+    <script src="version.js" type="text/javascript" charset="utf-8"></script>
+    <script src="jquery.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/common.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/dict.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/history.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/window.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/zoom.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/keyboard.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/index.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+<div id="sidebar">
+    <div id="qrybox"><textarea id="qry"></textarea></div>
+    <div id="toc"><div></div></div>
+    <div id="history" title="history"><div></div></div>
+    <div id="toolbar">
+        <button title="&beta;-keyboard" id="btnKeyboard">&beta;</button>
+        <button title="full morphology" id="btnFullmorph">F</button>
+        <button title="about" id="btnAbout">?</button>
+    </div>
+</div>
+<div id="content"></div>
+<div id="keyboard"></div>
+
+<div id="about"><div>
+    <p><img src="icon_128x128.png" width="128" height="128"></p>
+    <h1>Μυοσωτίς</h1>
+    <p>Version <span id="version"></span></p>
+    <p><a href="http://gramateka.net/myosotis">gramateka.net/myosotis</a></p>
+    <h2>Tools and resources:</h2>
+    <p>Dictionaries from the <a href="http://www.perseus.tufts.edu/hopper/opensource">Perseus Project</a></p>
+    <p><a href="https://github.com/rogerwang/node-webkit">node-webkit</a></p>
+    <p><a href="http://jquery.com">jQuery</a></p>
+    <p><a href="http://apagreekkeys.org/NAUdownload.html">New Athena Unicode</a> font</p>
+    <p>Patterns by <a href="http://orname.net">orname.net</a></p>
+    <h2><button>Ok</button></h2>
+</div></div>
+
+<div id="zoom"></div>
+
+</body>
+</html>
