@@ -11,6 +11,16 @@ module.exports = function(grunt) {
     var p = grunt.file.readJSON('package.json').options, opts = {};
     Object.keys(p).forEach(function(k) { opts[k] = expanduser(p[k]) });
 
+    function $f(str, args) {
+        return str.replace(/{(\d+)}/g, function(_, $1) {
+            return args[$1];
+        }).replace(/{#(\w+)}/g, function(_, $1) {
+                return opt($1);
+            });
+    }
+
+    opts['APP_NW'] = $f("{#BUILD_DIR}/app.nw");
+
     function opt(name) {
         return opts[name];
     }
@@ -37,14 +47,6 @@ module.exports = function(grunt) {
         return false;
     }
 
-    function $f(str, args) {
-        return str.replace(/{(\d+)}/g, function(_, $1) {
-            return args[$1];
-        }).replace(/{#(\w+)}/g, function(_, $1) {
-            return opt($1);
-        });
-    }
-    
     function $$(cmd) {
         cmd = $f(cmd, [].slice.call(arguments, 1));
         grunt.log.writeln("\n> " + cmd);
@@ -102,14 +104,14 @@ module.exports = function(grunt) {
     });
 
     grunt.registerTask("makeApp", "", function() {
-        $$("rm -f {#BUILD_DIR}/app.nw");
-        $$('cd ./app && zip -r {#BUILD_DIR}/app.nw * -x "*/.*"');
-        $$('cd {#BUILD_DIR} && zip -r {#BUILD_DIR}/app.nw data/* -x "*/.*"');
-        $$("zip -j {#BUILD_DIR}/app.nw {#FONT_PATH}");
+        $$("rm -f {#APP_NW}");
+        $$('cd ./app && zip -r {#APP_NW} * -x "*/.*"');
+        $$('cd {#BUILD_DIR} && zip -r {#APP_NW} data/* -x "*/.*"');
+        $$("zip -j {#APP_NW} {#FONT_PATH}");
         $$("echo \"VERSION='{#VERSION}'\" | tee {#BUILD_DIR}/version.js");
-        $$("zip -j {#BUILD_DIR}/app.nw {#BUILD_DIR}/version.js");
-        $$("zip -j {#BUILD_DIR}/app.nw ./icons.iconset/icon_128x128.png");
-        $$("zip -j {#BUILD_DIR}/app.nw ./node_modules/jquery/dist/jquery.js");
+        $$("zip -j {#APP_NW} {#BUILD_DIR}/version.js");
+        $$("zip -j {#APP_NW} ./icons.iconset/icon_128x128.png");
+        $$("zip -j {#APP_NW} ./node_modules/jquery/dist/jquery.js");
     });
 
     grunt.registerTask("compileDicts", "", function() {
@@ -148,7 +150,7 @@ module.exports = function(grunt) {
         }
 
         $$("rm -f {0}/Contents/Resources/*", app);
-        $$("cp {#BUILD_DIR}/app.nw {0}/Contents/Resources", app);
+        $$("cp {#APP_NW} {0}/Contents/Resources", app);
 
         patchPlist(app + "/Contents/Info.plist", opt("APPNAME"));
         $$("iconutil --convert icns --output {0}/Contents/Resources/nw.icns ./icons.iconset", app);
@@ -169,7 +171,9 @@ module.exports = function(grunt) {
             $$("cp {0}/icudtl.* {1}", nwpath, dir);
             $$("cp {0}/locales/en-US.pak {1}/locales", nwpath, dir);
         }
-        shell.cat(nwpath + "/nw.exe", opt("BUILD_DIR") + "/app.nw").to(app);
+
+        $$("cp {0}/nw.exe {1}", nwpath, app);
+        fs.appendFileSync(app, fs.readFileSync($f("{#APP_NW}")));
     });
 
     grunt.registerTask("dist", "", function() {
