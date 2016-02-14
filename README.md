@@ -7,7 +7,7 @@ Myosotis ("forget me not") is a desktop interface for Ancient Greek dictionaries
 
 Written in Javascript and built with [node-webkit](https://github.com/rogerwang/node-webkit).
 
-There are [Mac](http://gramateka.net/myosotis/mac) and [Windows](http://gramateka.net/myosotis/win) versions.
+There are [Mac](http://merribithouse.net/myosotis/mac) and [Windows](http://merribithouse.net/myosotis/win) versions.
 
 ![screenshot](https://raw.githubusercontent.com/gebrkn/Myosotis/master/app/screen.png)
 
